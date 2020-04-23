@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="registration.css">
+<title>Registracija korisnika</title>
+<p id="title">Registracija korisnika</p>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
+
+function registrovanje() {
+	var $form = $("#registracija");
+	var data = getFormData($form);
+	var s = JSON.stringify(data);
+	$.ajax({
+		url: "rest/chat/register",
+		type:"POST",
+		data: s,
+		contentType:"application/json",
+		accept: "application/json",
+		dataType:"json",
+		complete: function(data) {
+			console.log("proslo");
+		}
+	});
+}
+
+
+</script>
+
+
+</head>
+<body>
+<form method="post" action="rest/chat/register" >
+	<fieldset>
+	<label for="ime">Korisnicko ime:</label> <br>
+	<input type="text" id="ime" name="ime"/> <br>
+	<label for="sifra">Sifra:</label> <br>
+	<input type="text" id="sifra" name="sifra"/> <br>
+	 <input type="submit" value="submit"  /> <br>
+	 <input type="reset"/>
+     <a href="index.html" id="postReg">Povratak na pocetnu sranicu</a>
+	 </fieldset>
+</form>
+
+</body>
+</html>
