@@ -3,83 +3,87 @@ package services;
 
 
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import javax.ejb.Singleton;
 
 import beans.Korisnik;
-public class userServices {
 
-	private List<Korisnik> registrovaniKorisnici = new ArrayList<>();
-	private List<Korisnik> prijavljeniKorisnici = new ArrayList<>();
+@Singleton
+public class userServices {
 	
+	private HashMap<String, Korisnik> regKorisnici = new HashMap<String, Korisnik>();
+	private HashMap<String, Korisnik> logKorisnici = new HashMap<String, Korisnik>();
+
 	
-	public userServices() 
+	public userServices()
 	{
 		
 	}
 	
-	public void dodajRegistrovanog(Korisnik k)
+	public void dodajReg(Korisnik k)
 	{
-		registrovaniKorisnici.add(k);
-		
-	}
-	public void ukloniRegistrovanog(Korisnik k)
-	{
-		int num = registrovaniKorisnici.indexOf(k);
-		registrovaniKorisnici.remove(num);
+		regKorisnici.put(k.getIme(), k);
 	}
 	
-	public void dodajLogovanog(Korisnik k)
+	public void dodajLog(Korisnik k)
 	{
-		prijavljeniKorisnici.add(k);
-	}
-	
-	public void ukloniLogovanog(Korisnik k)
-	{
-		int num = prijavljeniKorisnici.indexOf(k);
-		prijavljeniKorisnici.remove(num);
-	}
-	
-	public boolean provjeraLogovanog(Korisnik k)
-	{
-		if(prijavljeniKorisnici.contains(k) == true)
-		{
-			return true;
-			
-		}
-		
-		
-		return false;
-	}
-	
-	
-	public void prikaziRegistrovane()
-	{
-		
-		for(Korisnik k : registrovaniKorisnici)
-		{
-			System.out.println(k.getIme());
-			
-		}
+		logKorisnici.put(k.getIme(), k);
 	}
 	
 	public boolean regPrazno()
 	{
-		if(registrovaniKorisnici.isEmpty() == true)
+		if(regKorisnici.isEmpty() == true)
 		{
 			return true;
 		}
-		else
-		return false;
+		else return false;
+	}
+	
+	public boolean regPostoji(Korisnik k)
+	{
+		if(regKorisnici.containsKey(k.getIme()))
+		{
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean logPrazno()
+	{
+		if(logKorisnici.isEmpty() == true)
+		{
+			return true;
+		}
+		else return false;
+	}
+	
+	public ArrayList listaLogovanih()
+	{
+		ArrayList<String> lista = new ArrayList<>();
+		for(String s  : logKorisnici.keySet())
+		{
+			lista.add(s);
 			
+		}
+		return lista;
 		
 	}
 	
-	
-	
-	
+	public ArrayList listaRegistrovanih()
+	{
+		ArrayList<String> lista = new ArrayList<>();
+		for(String s  : regKorisnici.keySet())
+		{
+			lista.add(s);
+			
+		}
+		return lista;
+		
+	}
 	
 }
 

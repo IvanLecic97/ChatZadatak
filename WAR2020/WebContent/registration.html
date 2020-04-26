@@ -19,22 +19,7 @@ function getFormData($form){
     return indexed_array;
 }
 
-function registrovanje() {
-	var $form = $("#registracija");
-	var data = getFormData($form);
-	var s = JSON.stringify(data);
-	$.ajax({
-		url: "rest/chat/register",
-		type:"POST",
-		data: s,
-		contentType:"application/json",
-		accept: "application/json",
-		dataType:"json",
-		complete: function(data) {
-			console.log("proslo");
-		}
-	});
-}
+
 
 
 </script>

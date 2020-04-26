@@ -4,15 +4,26 @@
 <meta charset="ISO-8859-1">
 <title>Prijava</title>
 <p id="title" style="text-align: center">Prijava korisnika</p>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+
+</script>
+
 </head>
 <body>
-	<form>
+	<form method="post" action="rest/chat/login" >
+	<fieldset>
 	<label for="ime">Korisnicko ime:</label> <br>
-	<input type="text" id="ime" name="ime"> <br>
+	<input type="text" id="ime" name="ime"/> <br>
 	<label for="sifra">Sifra:</label> <br>
-	<input type="text" id="sifra" name="sifra"> <br>
-	 <input type="submit" value="Potvrdi">
-	 <input type="reset">
+	<input type="text" id="sifra" name="sifra"/> <br>
+	 <input type="submit" value="Potvrdi"/>
+	 <input type="reset"/></fieldset>
 </form>
 </body>
 </html>
